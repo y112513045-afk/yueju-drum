@@ -1,0 +1,2947 @@
+/* 全局样式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* 演奏区域样式 */
+.instrument-btn {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    border: none;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.instrument-btn::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.instrument-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.instrument-btn.active {
+    transform: scale(0.98);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8) inset;
+}
+
+/* 节奏训练区域样式 */
+#rhythm-track {
+    position: relative;
+}
+
+.rhythm-note {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.rhythm-note.hit {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.rhythm-note.missed {
+    background-color: #ff4444;
+}
+
+.rhythm-note.perfect {
+    background-color: #00C851;
+}
+
+.rhythm-note.good {
+    background-color: #ffbb33;
+}
+
+/* 编曲区域样式 */
+.timeline-section {
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.timeline-section-label {
+    width: 100px;
+    font-weight: bold;
+    color: #666;
+}
+
+.timeline-track {
+    flex-grow: 1;
+    height: 40px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    position: relative;
+}
+
+.timeline-item {
+    position: absolute;
+    height: 30px;
+    top: 5px;
+    background-color: #4285F4;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: move;
+    padding: 0 6px;
+}
+
+/* 作品卡片样式 */
+.work-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.work-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.work-card-audio {
+    width: 100%;
+}
+
+.work-card-info {
+    padding: 12px;
+}
+
+.work-card-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.work-card-meta {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.work-card-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 素材库项样式 */
+.library-item {
+    background-color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: grab;
+    transition: all 0.2s ease;
+}
+
+.library-item:hover {
+    background-color: #e0e0e0;
+}
+
+.library-item:active {
+    cursor: grabbing;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse-animation {
+    animation: pulse 1s infinite;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .instrument-btn {
+        height: 100px;
+    }
+    
+    .timeline-section-label {
+        width: 80px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .instrument-btn {
+        height: 80px;
+    }
+    
+    .rhythm-note {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+}
+.text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+#play {
+    background-attachment: fixed; /* 可选：固定背景不随滚动移动 */
+}
+
+.instrument-btn img {
+    filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+    transform: scale(2.25);
+    transform-origin: center center;
+}
+
+/* 快捷键说明表格样式补充 */
+#style-selection table th,
+#style-selection table td {
+    border: 1px solid #e5e7eb;
+}
+#style-selection table th:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+#style-selection table th:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+#style-selection .bg-yellow-50 {
+    background-color: #fefce8;
+}
+
+/* =========================================
+    中华传统乐器主题 - 红金配色
+ ========================================= */
+
+/* 主题头部 - 红色 */
+header.theme-header {
+    background: linear-gradient(180deg, #8B0000 0%, #6B0000 100%);
+    border-bottom: 2px solid rgba(255,215,0,0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+header.theme-header a:hover {
+    color: #FFD700 !important;
+}
+
+/* 主题内容区域 */
+.theme-section {
+    background: linear-gradient(145deg, rgba(40,20,20,0.95) 0%, rgba(30,10,10,0.98) 100%);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+/* 主题卡片 */
+.theme-card {
+    background: linear-gradient(145deg, #2d1515 0%, #1f0a0a 100%);
+    border: 1px solid rgba(255,215,0,0.15);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.theme-card:hover {
+    border-color: rgba(255,215,0,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(139,0,0,0.3);
+}
+
+/* 主题按钮 */
+.theme-btn-primary {
+    background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+    border: 1px solid rgba(255,215,0,0.4);
+    color: #FFD700;
+    transition: all 0.3s ease;
+}
+
+.theme-btn-primary:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    box-shadow: 0 0 25px rgba(255,215,0,0.4);
+    transform: translateY(-2px);
+}
+
+/* 主题页脚 */
+footer.theme-footer {
+    background: linear-gradient(180deg, #1f0a0a 0%, #0f0505 100%);
+    border-top: 2px solid rgba(255,215,0,0.2);
+}
+
+/* =========================================
+    中华传统乐器主题 - 库乐队风格优化
+ ========================================= */
+
+/* 沉浸式深色录音室背景 + 中国传统云纹 + 红色主题 */
+.studio-stage {
+    background-image:
+        radial-gradient(ellipse at 50% 120%, rgba(139, 0, 0, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(180, 83, 9, 0.18) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 80%, rgba(180, 83, 9, 0.18) 0%, transparent 40%),
+        linear-gradient(180deg, rgba(20, 8, 8, 0.55) 0%, rgba(15, 5, 5, 0.65) 100%),
+        url('../images/background/background.png?v=20260412');
+    background-position: center, center, center, center, center;
+    background-size: cover, cover, cover, cover, cover;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 150px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+/* 中国传统云纹装饰层 */
+.studio-stage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(ellipse 80% 50% at 10% 20%, rgba(255,215,0,0.03) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 90% 30%, rgba(255,215,0,0.02) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 60% at 50% 90%, rgba(139,69,19,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 舞台边缘光晕效果 */
+.studio-stage::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 80%;
+    border: 1px solid rgba(255,215,0,0.1);
+    border-radius: 20px;
+    box-shadow: 
+        0 0 60px rgba(255,215,0,0.05),
+        inset 0 0 60px rgba(0,0,0,0.3);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 乐器舞台容器 */
+#instrument-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    z-index: 10;
+}
+
+/* 圈子/架子鼓风格布局 */
+.instrument-circle-layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 架子鼓风格错落布局 */
+.instrument-drum-layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.drum-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 圈子布局 - 环绕中心 */
+.instrument-ring {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instrument-ring .instrument-card {
+    position: absolute;
+    min-width: 120px;
+    min-height: 130px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instrument-ring .instrument-card:hover {
+    z-index: 20 !important;
+}
+
+/* 中心装饰 */
+.ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, rgba(139,69,19,0.1) 50%, transparent 70%);
+    border: 1px solid rgba(255,215,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.ring-center::before {
+    content: '粤韵';
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(255,215,0,0.6);
+    text-shadow: 0 0 20px rgba(255,215,0,0.3);
+}
+
+/* 网格布局 - 库乐队风格 */
+.instrument-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .instrument-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* 乐器卡片 - 玻璃质感+中国风边框 */
+.instrument-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(30,30,40,0.8) 0%, rgba(20,20,30,0.9) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255,215,0,0.15);
+    box-shadow: 
+        0 10px 40px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    min-height: 180px;
+}
+
+.instrument-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.instrument-card:hover::before {
+    left: 100%;
+}
+
+.instrument-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(255,215,0,0.4);
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.5),
+        0 0 30px rgba(255,215,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.instrument-card:active {
+    transform: scale(0.95);
+}
+
+/* 乐器图片容器 */
+.instrument-image-container {
+    position: relative;
+    width: 70%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.instrument-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+    transition: all 0.2s ease;
+    transform: scale(2.25);
+    transform-origin: center center;
+}
+
+.instrument-card:hover img {
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.6)) brightness(1.1);
+    transform: scale(2.33);
+}
+
+/* 乐器名称标签 */
+.instrument-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0e6d3;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+/* 快捷键徽章 */
+.shortcut-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(145deg, rgba(255,215,0,0.2), rgba(180,140,0,0.3));
+    border: 1px solid rgba(255,215,0,0.3);
+    color: #ffd700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+}
+
+.instrument-card:hover .shortcut-badge {
+    background: linear-gradient(145deg, rgba(255,215,0,0.3), rgba(180,140,0,0.4));
+    transform: scale(1.1);
+}
+
+/* 敲击时的光效 */
+.instrument-hit-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.instrument-card.hit .instrument-hit-glow {
+    animation: hitGlow 0.3s ease-out;
+}
+
+@keyframes hitGlow {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+}
+
+/* 乐器敲击的物理震动动画 */
+@keyframes instrument-hit {
+    0% { transform: scale(1); filter: brightness(1); }
+    20% { transform: scale(0.92) translateY(3px); filter: brightness(1.2); }
+    50% { transform: scale(1.02); filter: brightness(1.05); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* 触发动画的专属类 */
+.hit-anim {
+    animation: instrument-hit 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 快击（右键）时的特殊光效 */
+.instrument-card.fast-hit .instrument-hit-glow {
+    background: radial-gradient(circle, rgba(255, 100, 100, 0.6) 0%, transparent 70%);
+    animation: fastHitGlow 0.2s ease-out;
+}
+
+@keyframes fastHitGlow {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.3); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
+}
+
+/* 快击时的震动动画 */
+.instrument-card.fast-hit {
+    animation: fast-instrument-hit 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes fast-instrument-hit {
+    0% { transform: scale(1); filter: brightness(1); }
+    30% { transform: scale(0.88) translateY(2px); filter: brightness(1.4); }
+    60% { transform: scale(1.03); filter: brightness(1.1); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* 乐器条目样式 - 新布局 */
+.instrument-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+/* 毛玻璃质感 (Apple 风格 UI) */
+.glass-panel {
+    background: rgba(30, 30, 35, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* 乐器通用样式优化：去除默认按钮样式，变为透明可点击图像 */
+.instrument-btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    /* 添加一点自然的投影让乐器有立体感 */
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.5)); 
+    transition: filter 0.2s ease;
+}
+
+.instrument-btn:hover {
+    filter: drop-shadow(0 20px 20px rgba(0,0,0,0.6)) brightness(1.1);
+    transform: scale(1.02);
+}
+
+/* 快捷键小标 */
+.shortcut-badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+/* =========================================
+    架子鼓风格布局
+ ========================================= */
+
+.drum-set-layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.drum-instrument-card {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(30,30,40,0.7) 0%, rgba(20,20,30,0.85) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255,215,0,0.12);
+    box-shadow: 
+        0 8px 30px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+}
+
+.drum-instrument-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.08), transparent);
+    transition: left 0.4s ease;
+}
+
+.drum-instrument-card:hover::before {
+    left: 100%;
+}
+
+.drum-instrument-card:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    border-color: rgba(255,215,0,0.3);
+    box-shadow: 
+        0 15px 45px rgba(0,0,0,0.5),
+        0 0 25px rgba(255,215,0,0.1);
+    z-index: 10;
+}
+
+.drum-instrument-card:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+.drum-image-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.drum-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    transition: all 0.2s ease;
+    transform: scale(2.25);
+    transform-origin: center center;
+}
+
+.drum-instrument-card:hover .drum-image-container img {
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6)) brightness(1.1);
+    transform: scale(2.33);
+}
+
+.drum-instrument-card .instrument-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #f0e6d3;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 0.5px;
+}
+
+.drum-instrument-card .shortcut-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: linear-gradient(145deg, rgba(255,215,0,0.15), rgba(180,140,0,0.2));
+    border: 1px solid rgba(255,215,0,0.25);
+    color: #ffd700;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+/* 左右键双音频标记 */
+.dual-sound-badge {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    z-index: 5;
+}
+
+.badge-left, .badge-right {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+.badge-left {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.badge-right {
+    background: linear-gradient(135deg, #FF5722, #BF360C);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* 鼓组中心装饰 */
+.drum-center-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(139,69,19,0.05) 50%, transparent 70%);
+    border: 1px dashed rgba(255,215,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.drum-center-decoration::before {
+    content: '鼓';
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(255,215,0,0.3);
+}
+
+/* 掌版乐器群组标记 */
+.zhangban-group {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+    height: 45%;
+    border: 1px dashed rgba(255,215,0,0.15);
+    border-radius: 16px;
+    background: rgba(139,69,19,0.05);
+}
+
+.zhangban-group::before {
+    content: '掌版';
+    position: absolute;
+    top: -12px;
+    left: 10px;
+    font-size: 10px;
+    color: rgba(255,215,0,0.4);
+    background: rgba(20,20,30,0.9);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,215,0,0.2);
+}
+
+/* =========================================
+   3x3 网格布局样式
+========================================= */
+
+.instrument-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.grid-instrument-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(30,30,40,0.8) 0%, rgba(20,20,30,0.9) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255,215,0,0.15);
+    box-shadow: 
+        0 10px 40px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    padding: 15px;
+}
+
+.grid-instrument-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.grid-instrument-card:hover::before {
+    left: 100%;
+}
+
+.grid-instrument-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(255,215,0,0.4);
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.5),
+        0 0 30px rgba(255,215,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.grid-instrument-card:active {
+    transform: scale(0.95);
+}
+
+.grid-image-container {
+    position: relative;
+    width: 80%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.grid-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+    transition: all 0.2s ease;
+    transform: scale(2.25);
+    transform-origin: center center;
+}
+
+.grid-instrument-card:hover .grid-image-container img {
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.6)) brightness(1.1);
+    transform: scale(2.33);
+}
+
+.grid-instrument-card .instrument-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0e6d3;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+.grid-instrument-card .shortcut-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(145deg, rgba(255,215,0,0.2), rgba(180,140,0,0.3));
+    border: 1px solid rgba(255,215,0,0.3);
+    color: #ffd700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+}
+
+.grid-instrument-card:hover .shortcut-badge {
+    background: linear-gradient(145deg, rgba(255,215,0,0.3), rgba(180,140,0,0.4));
+    transform: scale(1.1);
+}
+
+.grid-instrument-card .instrument-hit-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.grid-instrument-card.hit .instrument-hit-glow {
+    animation: hitGlow 0.3s ease-out;
+}
+
+.grid-instrument-card.hit-anim {
+    animation: instrument-hit 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.grid-instrument-card.fast-hit .instrument-hit-glow {
+    background: radial-gradient(circle, rgba(255, 100, 100, 0.6) 0%, transparent 70%);
+    animation: fastHitGlow 0.2s ease-out;
+}
+
+.grid-instrument-card.fast-hit {
+    animation: fast-instrument-hit 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .instrument-grid-layout {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .grid-instrument-card {
+        padding: 10px;
+    }
+    
+    .grid-instrument-card .instrument-name {
+        font-size: 12px;
+    }
+    
+    .grid-instrument-card .shortcut-badge {
+        top: 8px;
+        right: 8px;
+        padding: 3px 8px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .instrument-grid-layout {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .grid-instrument-card {
+        padding: 8px;
+    }
+}
+
+/* =========================================
+   传统韵味中心辐射式布局
+   设计理念：中心主鼓 + 内圈掌版组 + 外圈锣钹
+========================================= */
+
+.traditional-layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 传统乐器卡片 - 图片缩小50% */
+.traditional-instrument-card {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(30,30,40,0.85) 0%, rgba(20,20,30,0.95) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255,215,0,0.15);
+    box-shadow: 
+        0 8px 30px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+    padding: 12px;
+    min-width: 90px;
+    min-height: 100px;
+}
+
+/* 图片容器 - 缩小50% */
+.traditional-image-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.traditional-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+    transition: all 0.2s ease;
+    transform: scale(2.25);
+    transform-origin: center center;
+}
+
+.traditional-instrument-card:hover .traditional-image-container img {
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)) brightness(1.1);
+    transform: scale(2.33);
+}
+
+.traditional-instrument-card .instrument-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #f0e6d3;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.traditional-instrument-card .shortcut-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: linear-gradient(145deg, rgba(255,215,0,0.2), rgba(180,140,0,0.3));
+    border: 1px solid rgba(255,215,0,0.3);
+    color: #ffd700;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+/* 中心主鼓 - 更大尺寸 */
+.traditional-instrument-card.center-drum {
+    min-width: 110px;
+    min-height: 120px;
+    padding: 15px;
+    z-index: 10;
+}
+
+.traditional-instrument-card.center-drum .traditional-image-container {
+    width: 60px;
+    height: 60px;
+}
+
+.traditional-instrument-card.center-drum .instrument-name {
+    font-size: 14px;
+}
+
+/* 内圈乐器 - 掌版组 */
+.traditional-instrument-card.inner-circle {
+    min-width: 85px;
+    min-height: 95px;
+    z-index: 8;
+}
+
+/* 外圈乐器 - 锣钹类 */
+.traditional-instrument-card.outer-circle {
+    z-index: 6;
+}
+
+/* 悬停效果 */
+.traditional-instrument-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.08), transparent);
+    transition: left 0.4s ease;
+}
+
+.traditional-instrument-card:hover::before {
+    left: 100%;
+}
+
+.traditional-instrument-card:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    border-color: rgba(255,215,0,0.4);
+    box-shadow: 
+        0 15px 45px rgba(0,0,0,0.6),
+        0 0 30px rgba(255,215,0,0.15);
+    z-index: 20 !important;
+}
+
+.traditional-instrument-card:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* 敲击动画 */
+.traditional-instrument-card.hit-anim {
+    animation: instrument-hit 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.traditional-instrument-card .instrument-hit-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.traditional-instrument-card.hit .instrument-hit-glow {
+    animation: hitGlow 0.3s ease-out;
+}
+
+/* 中心装饰圆环 */
+.center-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,215,0,0.12);
+    background: radial-gradient(circle, rgba(255,215,0,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.center-decoration::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,215,0,0.08);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .traditional-instrument-card {
+        min-width: 75px;
+        min-height: 85px;
+        padding: 10px;
+    }
+    
+    .traditional-image-container {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .traditional-instrument-card .instrument-name {
+        font-size: 11px;
+    }
+    
+    .traditional-instrument-card.center-drum {
+        min-width: 90px;
+        min-height: 100px;
+    }
+    
+    .traditional-instrument-card.center-drum .traditional-image-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .center-decoration {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .center-decoration::before {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .traditional-instrument-card {
+        min-width: 65px;
+        min-height: 75px;
+        padding: 8px;
+    }
+    
+    .traditional-image-container {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .traditional-instrument-card .instrument-name {
+        font-size: 10px;
+    }
+}
+
+/* =========================================
+   分区舞台布局（京剧司鼓 / 粤剧掌版）
+========================================= */
+
+.split-layout-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1260px;
+    margin: 0 auto;
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+    padding: 14px 18px 8px;
+}
+
+.stage-panel {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100%;
+}
+
+.stage-panel-rows {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 26px;
+    align-content: center;
+    padding-top: 10px;
+}
+
+.instrument-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 42px;
+    min-height: 215px;
+}
+
+.instrument-row.bottom-row {
+    padding-top: 8px;
+}
+
+/* 左半区第一行（大锣/铙钹/小锣）单独加宽一倍 */
+.left-panel .instrument-row.top-row {
+    gap: 84px;
+}
+
+.stage-subtle-divider {
+    align-self: stretch;
+    margin: 28px 0 58px;
+    background: linear-gradient(180deg, transparent 0%, rgba(255,215,0,0.22) 45%, rgba(255,215,0,0.22) 55%, transparent 100%);
+    opacity: 0.5;
+    filter: blur(0.2px);
+}
+
+.stage-caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 10px 4px;
+    text-align: center;
+    color: rgba(255, 236, 179, 0.92);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+.stage-caption-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.stage-caption-desc {
+    font-size: 12px;
+    color: rgba(255, 230, 160, 0.75);
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   圆形乐器卡片通用样式（用于分区布局中的单个乐器）
+========================================= */
+
+.circle-layout {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 800px;
+    max-height: 800px;
+    margin: 0 auto;
+    min-height: 500px;
+}
+
+/* 圆形乐器卡片 */
+.circle-instrument-card {
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+    padding: 0;
+    width: auto;
+    height: auto;
+}
+
+/* 图片容器 - 缩小50% */
+.circle-image-container {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.circle-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    transition: all 0.2s ease;
+    transform: scale(2.25);
+    transform-origin: center center;
+}
+
+.circle-instrument-card:hover .circle-image-container img {
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6)) brightness(1.1);
+    transform: scale(2.33);
+}
+
+/* 乐器名称 */
+.circle-instrument-card .instrument-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f0e6d3;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 8px;
+    position: relative;
+    z-index: 12;
+}
+
+/* 快捷键徽章 */
+.circle-instrument-card .shortcut-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: linear-gradient(145deg, rgba(255,215,0,0.25), rgba(180,140,0,0.35));
+    border: 1px solid rgba(255,215,0,0.4);
+    color: #ffd700;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* 左右键标记 */
+.circle-instrument-card .dual-sound-badge {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    z-index: 5;
+}
+
+.badge-left, .badge-right {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+.badge-left {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.badge-right {
+    background: linear-gradient(135deg, #FF5722, #BF360C);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* 悬停效果 */
+.circle-instrument-card::before {
+    content: none;
+}
+
+.circle-instrument-card:hover::before {
+    left: 100%;
+}
+
+.circle-instrument-card:hover {
+    transform: scale(1.04);
+    border-color: transparent;
+    box-shadow: none;
+    z-index: 100 !important;
+}
+
+.circle-instrument-card:active {
+    transform: scale(0.95);
+}
+
+/* 敲击动画 */
+.circle-instrument-card.hit-anim {
+    animation: instrument-hit 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.circle-instrument-card .instrument-hit-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 针对白底素材（双皮鼓/沙鼓/木鱼/单皮鼓）局部去白底，不影响其他乐器亮度 */
+.circle-instrument-card[data-id="zhangban-shuangpigu"] .circle-image-container img,
+.circle-instrument-card[data-id="zhangban-shagu"] .circle-image-container img,
+.circle-instrument-card[data-id="zhangban-muyu"] .circle-image-container img {
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)) brightness(1.32) contrast(1.28) saturate(1.15);
+}
+
+.circle-instrument-card[data-id="zhangban-shuangpigu"]:hover .circle-image-container img,
+.circle-instrument-card[data-id="zhangban-shagu"]:hover .circle-image-container img,
+.circle-instrument-card[data-id="zhangban-muyu"]:hover .circle-image-container img {
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6)) brightness(1.38) contrast(1.32) saturate(1.2);
+}
+
+.circle-instrument-card.hit .instrument-hit-glow {
+    animation: hitGlow 0.3s ease-out;
+}
+
+/* 中心装饰 */
+.circle-center-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255,215,0,0.15);
+    background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.circle-center-decoration::before {
+    content: '粤韵';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(255,215,0,0.3);
+    text-shadow: 0 0 20px rgba(255,215,0,0.2);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .split-layout-stage {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        min-height: auto;
+        padding: 10px 8px 0;
+    }
+
+    .stage-subtle-divider {
+        display: none;
+    }
+
+    .stage-panel-rows {
+        gap: 16px;
+    }
+
+    .instrument-row {
+        gap: 22px;
+        min-height: 165px;
+    }
+
+    .circle-layout {
+        max-width: 600px;
+        max-height: 600px;
+    }
+    
+    .circle-instrument-card {
+        width: auto;
+        height: auto;
+        padding: 0;
+    }
+    
+    .circle-image-container {
+        width: 72px;
+        height: 72px;
+    }
+    
+    .circle-instrument-card .instrument-name {
+        font-size: 12px;
+    }
+    
+    .circle-center-decoration {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .circle-center-decoration::before {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stage-caption-title {
+        font-size: 15px;
+    }
+
+    .stage-caption-desc {
+        font-size: 11px;
+    }
+
+    .instrument-row {
+        gap: 14px;
+        min-height: 132px;
+    }
+
+    .circle-layout {
+        max-width: 450px;
+        max-height: 450px;
+    }
+    
+    .circle-instrument-card {
+        width: auto;
+        height: auto;
+        padding: 0;
+    }
+    
+    .circle-image-container {
+        width: 58px;
+        height: 58px;
+    }
+    
+    .circle-instrument-card .instrument-name {
+        font-size: 11px;
+    }
+    
+    .circle-instrument-card .shortcut-badge {
+        top: 6px;
+        right: 6px;
+        padding: 2px 6px;
+        font-size: 10px;
+    }
+    
+    .circle-center-decoration {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .circle-center-decoration::before {
+        font-size: 18px;
+    }
+}
+
+/* =========================================
+   Play Page - 小程序演奏页面复刻 (200% scale)
+   ========================================= */
+
+.play-page {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background-color: #1c0606;
+    color: #fff5e6;
+    overflow: hidden;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.stage-wrap {
+    position: relative;
+    margin: 0;
+    flex: 1 1 auto;
+    min-height: 700px;
+    border: 2px solid rgba(244, 183, 92, 0.22);
+    border-radius: 40px;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 22%, rgba(243, 149, 77, 0.22), rgba(31, 9, 7, 0.62) 56%),
+        linear-gradient(180deg, rgba(37, 7, 6, 0.55) 0%, rgba(46, 16, 12, 0.62) 45%, rgba(28, 8, 7, 0.7) 100%);
+}
+
+.stage-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    object-fit: cover;
+}
+
+.stage-light {
+    position: absolute;
+    left: 18%;
+    top: -8%;
+    width: 64%;
+    height: 56%;
+    background: radial-gradient(circle, rgba(255, 193, 117, 0.22), rgba(255, 193, 117, 0));
+    z-index: 1;
+    pointer-events: none;
+}
+
+.stage-floor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56%;
+    background: linear-gradient(180deg, rgba(160, 87, 38, 0.22), rgba(77, 29, 14, 0.72));
+    z-index: 1;
+    pointer-events: none;
+}
+
+.landscape-tip {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: rgba(255, 245, 230, 0.9);
+    font-size: 22px;
+    margin-top: 6px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.top-mode-switch {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 8px;
+}
+
+.top-mode-btn {
+    padding: 12px 40px;
+    border-radius: 999px;
+    font-size: 22px;
+    line-height: 1.2;
+    color: rgba(255, 245, 230, 0.92);
+    background: rgba(68, 24, 16, 0.45);
+    border: 1px solid rgba(255, 196, 121, 0.32);
+    box-shadow: inset 0 0 10px rgba(255, 183, 104, 0.1);
+    cursor: pointer;
+    user-select: none;
+}
+
+.top-mode-btn-active {
+    color: #fff;
+    background: linear-gradient(180deg, rgba(188, 86, 46, 0.9), rgba(132, 49, 27, 0.86));
+    border-color: rgba(255, 225, 170, 0.78);
+    box-shadow: 0 4px 14px rgba(255, 166, 94, 0.28);
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    height: calc(100% - 156px);
+    display: block;
+}
+
+.scene-switch {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.scene-btn-group {
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.scene-btn-panel {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 180, 100, 0.25);
+    border-radius: 999px;
+    padding: 6px 10px;
+    backdrop-filter: blur(6px);
+}
+
+.scene-btn {
+    padding: 8px 28px;
+    font-size: 22px;
+    line-height: 1.3;
+    color: rgba(255, 245, 230, 0.95);
+    background: rgba(95, 32, 18, 0.45);
+    border: 1px solid rgba(255, 202, 126, 0.28);
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.scene-btn-active {
+    color: #fff;
+    background: rgba(165, 74, 38, 0.75);
+    border-color: rgba(255, 220, 160, 0.75);
+}
+
+.hit-name {
+    position: relative;
+    z-index: 2;
+    margin: 0 16px;
+    padding: 6px 16px;
+    font-size: 20px;
+    line-height: 1.2;
+    color: rgba(255, 245, 230, 0.85);
+    background: rgba(20, 8, 8, 0.28);
+    border-radius: 20px;
+    text-align: center;
+    min-width: 300px;
+    max-width: 440px;
+    flex-shrink: 0;
+    transition: all 0.18s ease;
+}
+
+.hit-name-active {
+    color: #fff5e6;
+    background: rgba(168, 74, 34, 0.45);
+    box-shadow: 0 0 12px rgba(255, 195, 113, 0.45);
+}
+
+.scene-intro {
+    font-size: 18px;
+    line-height: 1.3;
+    color: rgba(255, 245, 230, 0.95);
+    text-align: right;
+    max-width: 600px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.mode-section {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 4px 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: translateY(-12px);
+}
+
+.row {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.row-1 { margin-top: 0; }
+.row-2 { margin-top: 0; margin-bottom: 0; }
+
+.row-2-jingju {
+    justify-content: center;
+    padding-left: 0;
+}
+
+.row-2-yueju {
+    justify-content: center;
+    gap: 4px;
+}
+
+.row-2-yueju .pad-wrapper {
+    width: 272px;
+}
+
+.pad-wrapper {
+    width: 316px;
+    text-align: center;
+    position: relative;
+}
+
+.key-hint {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 245, 230, 0.45);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 245, 230, 0.15);
+    border-radius: 4px;
+    padding: 1px 5px;
+    line-height: 1.4;
+    pointer-events: none;
+    font-family: 'Courier New', monospace;
+    z-index: 3;
+}
+
+.pad-btn {
+    width: 316px;
+    height: 316px;
+    margin: 0 auto;
+    border-radius: 36px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    transition: transform 120ms ease, filter 120ms ease;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.pad-img {
+    width: 308px;
+    height: 308px;
+    filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.45));
+    pointer-events: none;
+    object-fit: contain;
+}
+
+.pad-gaobian-luo .pad-btn,
+.pad-wen-luo .pad-btn {
+    width: 376px;
+    height: 376px;
+}
+.pad-gaobian-luo .pad-img,
+.pad-wen-luo .pad-img {
+    width: 368px;
+    height: 368px;
+}
+
+.pad-danpi-gu {
+    margin-left: 0;
+    transform: translateY(-12px);
+}
+.pad-danpi-gu .pad-btn {
+    width: 364px;
+    height: 364px;
+}
+.pad-danpi-gu .pad-img {
+    width: 356px;
+    height: 356px;
+}
+
+.pad-nao-bo {
+    transform: translateY(-48px);
+}
+
+.pad-shuangpi-gu,
+.pad-sha-gu {
+    transform: translateY(-52px);
+}
+.pad-shuangpi-gu .pad-btn,
+.pad-sha-gu .pad-btn {
+    width: 352px;
+    height: 352px;
+}
+.pad-shuangpi-gu .pad-img,
+.pad-sha-gu .pad-img {
+    width: 344px;
+    height: 344px;
+}
+.pad-shuangpi-gu { margin-right: -16px; }
+.pad-sha-gu { margin-left: -16px; }
+
+.pad-mu-yu {
+    transform: translateY(20px);
+}
+.pad-mu-yu .pad-btn {
+    width: 240px;
+    height: 240px;
+}
+.pad-mu-yu .pad-img {
+    width: 232px;
+    height: 232px;
+}
+
+.hit-ripple,
+.hit-spark {
+    position: absolute;
+    inset: 0;
+    border-radius: 36px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hit-ripple {
+    border: 2px solid rgba(255, 220, 130, 0.9);
+}
+
+.hit-spark {
+    background: radial-gradient(circle, rgba(255, 236, 184, 0.45), rgba(255, 236, 184, 0));
+}
+
+.hit-anim {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+.hit-anim .hit-ripple {
+    animation: ripple 0.28s ease-out;
+}
+
+.hit-anim .hit-spark {
+    animation: spark 0.22s ease-out;
+}
+
+@keyframes ripple {
+    0% { transform: scale(0.65); opacity: 0.85; }
+    100% { transform: scale(1.2); opacity: 0; }
+}
+
+@keyframes spark {
+    0% { opacity: 0.9; }
+    100% { opacity: 0; }
+}
+
+.challenge-layout {
+    position: relative;
+    z-index: 2;
+    height: calc(100% - 156px);
+    margin-top: 12px;
+    padding: 4px 20px 88px;
+    box-sizing: border-box;
+    display: block;
+}
+
+.challenge-main {
+    height: 100%;
+    display: flex;
+    gap: 24px;
+}
+
+.challenge-left {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.challenge-level {
+    font-size: 24px;
+    line-height: 1.3;
+    color: #fff5e6;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.challenge-card {
+    padding: 24px 20px;
+    border-radius: 28px;
+    border: 1px solid rgba(255, 201, 126, 0.34);
+    background:
+        radial-gradient(circle at 22% 18%, rgba(255, 193, 123, 0.18), rgba(255, 193, 123, 0) 48%),
+        linear-gradient(165deg, rgba(73, 24, 17, 0.82), rgba(32, 11, 10, 0.85));
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
+    color: rgba(255, 245, 230, 0.95);
+}
+
+.challenge-token-label {
+    font-size: 20px;
+    opacity: 0.86;
+}
+
+.challenge-token {
+    font-size: 68px;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 8px;
+    margin: 16px 0;
+    color: #fff5e6;
+    text-shadow: 0 4px 12px rgba(248, 153, 75, 0.4);
+}
+
+.challenge-expected,
+.challenge-window {
+    font-size: 20px;
+    line-height: 1.35;
+    color: rgba(255, 245, 230, 0.95);
+}
+
+.challenge-window {
+    margin-top: 12px;
+    color: rgba(255, 245, 230, 0.88);
+}
+
+.challenge-feedback {
+    padding: 16px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    line-height: 1.3;
+    border: 1px solid transparent;
+}
+
+.challenge-feedback-info {
+    color: rgba(255, 245, 230, 0.95);
+    background: rgba(73, 32, 20, 0.5);
+    border-color: rgba(255, 197, 120, 0.25);
+}
+
+.challenge-feedback-warn {
+    color: #fff5e6;
+    background: rgba(121, 45, 24, 0.52);
+    border-color: rgba(255, 176, 119, 0.48);
+}
+
+.challenge-feedback-success {
+    color: #fff5e6;
+    background: rgba(71, 108, 42, 0.46);
+    border-color: rgba(191, 235, 128, 0.45);
+}
+
+.challenge-coming {
+    font-size: 20px;
+    color: rgba(255, 245, 230, 0.8);
+    text-align: center;
+}
+
+.challenge-right {
+    width: 68%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4px 8px;
+    box-sizing: border-box;
+}
+
+.challenge-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.challenge-row-single {
+    flex-wrap: nowrap;
+    margin-top: -4px;
+}
+
+.challenge-pad-wrapper {
+    text-align: center;
+}
+
+.challenge-pad-btn {
+    width: 244px;
+    height: 244px;
+    border-radius: 36px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(56, 18, 12, 0.2);
+    border: 1px solid rgba(255, 188, 112, 0.22);
+    box-shadow: inset 0 0 16px rgba(255, 161, 89, 0.1);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.challenge-pad-img {
+    width: 232px;
+    height: 232px;
+    filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.42));
+    pointer-events: none;
+    object-fit: contain;
+}
+
+.challenge-pad-name {
+    margin-top: 4px;
+    font-size: 20px;
+    color: rgba(255, 245, 230, 0.95);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.challenge-progress-wrap {
+    padding: 0 16px;
+    margin-bottom: 8px;
+}
+
+.challenge-progress-bottom {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: -36px;
+    margin-bottom: 0;
+    z-index: 3;
+}
+
+.challenge-progress-track {
+    height: 24px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(62, 23, 16, 0.66);
+    border: 1px solid rgba(255, 191, 118, 0.24);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.28);
+}
+
+.challenge-progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ffb66a, #ffd08a 65%, #ffe7b0);
+    box-shadow: 0 0 12px rgba(255, 188, 101, 0.45);
+    transition: width 0.2s ease;
+}
+
+.challenge-progress-text {
+    margin-top: 8px;
+    text-align: right;
+    font-size: 20px;
+    color: rgba(255, 245, 230, 0.92);
+}
+
+@media (max-width: 1200px) {
+    .pad-wrapper { width: 220px; }
+    .pad-btn { width: 220px; height: 220px; }
+    .pad-img { width: 214px; height: 214px; }
+    .pad-gaobian-luo .pad-btn, .pad-wen-luo .pad-btn { width: 260px; height: 260px; }
+    .pad-gaobian-luo .pad-img, .pad-wen-luo .pad-img { width: 254px; height: 254px; }
+    .pad-danpi-gu .pad-btn { width: 250px; height: 250px; }
+    .pad-danpi-gu .pad-img { width: 244px; height: 244px; }
+    .pad-shuangpi-gu .pad-btn, .pad-sha-gu .pad-btn { width: 240px; height: 240px; }
+    .pad-shuangpi-gu .pad-img, .pad-sha-gu .pad-img { width: 234px; height: 234px; }
+    .pad-mu-yu .pad-btn { width: 180px; height: 180px; }
+    .pad-mu-yu .pad-img { width: 174px; height: 174px; }
+    .row-2-yueju .pad-wrapper { width: 200px; }
+    .challenge-pad-btn { width: 180px; height: 180px; }
+    .challenge-pad-img { width: 172px; height: 172px; }
+}
+
+/* =========================================
+   Recording Control Panel
+   ========================================= */
+
+.rec-dock {
+    display: flex;
+    justify-content: center;
+    padding: 10px 16px 14px;
+}
+
+.rec-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(30, 12, 8, 0.88);
+    border: 1px solid rgba(255, 180, 100, 0.22);
+    border-radius: 999px;
+    padding: 10px 28px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.rec-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 180, 100, 0.35);
+    background: rgba(60, 20, 12, 0.6);
+    color: #fff5e6;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.rec-btn:hover:not(:disabled) {
+    background: rgba(180, 70, 30, 0.7);
+    border-color: rgba(255, 200, 130, 0.6);
+    transform: scale(1.08);
+}
+
+.rec-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.rec-btn-rec {
+    background: rgba(180, 30, 30, 0.7);
+    border-color: rgba(255, 80, 80, 0.5);
+}
+
+.rec-btn-rec:hover:not(:disabled) {
+    background: rgba(220, 40, 40, 0.85);
+}
+
+.rec-btn-active {
+    box-shadow: 0 0 14px rgba(255, 100, 60, 0.5);
+    animation: recPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes recPulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(255, 100, 60, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 100, 60, 0.6); }
+}
+
+.rec-time {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffd08a;
+    font-family: 'Courier New', monospace;
+    min-width: 60px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.rec-status {
+    font-size: 13px;
+    color: rgba(255, 245, 230, 0.7);
+    min-width: 50px;
+    text-align: center;
+}
+
+.rec-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 180, 100, 0.2);
+}
+
+/* =========================================
+   Professional Mode -独有布局
+   ========================================= */
+
+.pro-page {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background-color: #0f0505;
+    color: #fff5e6;
+    overflow: hidden;
+}
+
+.pro-stage {
+    flex: 1 1 auto;
+    position: relative;
+    min-height: 400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pro-stage-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.pro-stage-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 5, 5, 0.3) 0%, rgba(15, 5, 5, 0.5) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.pro-instruments {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    padding: 20px 20px 70px;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+
+.pro-inst-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    position: relative;
+}
+
+.pro-key-hint {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 245, 230, 0.4);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 245, 230, 0.12);
+    border-radius: 4px;
+    padding: 1px 4px;
+    line-height: 1.4;
+    pointer-events: none;
+    font-family: 'Courier New', monospace;
+}
+
+.pro-inst-card:hover {
+    transform: scale(1.06);
+}
+
+.pro-inst-card:active {
+    transform: scale(0.95);
+}
+
+.pro-inst-img {
+    width: 110px;
+    height: 110px;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+    object-fit: contain;
+    transition: filter 0.15s ease;
+}
+
+.pro-inst-card.hit-anim .pro-inst-img {
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5)) brightness(1.3);
+}
+
+.pro-inst-name {
+    margin-top: 6px;
+    font-size: 14px;
+    color: rgba(255, 245, 230, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.pro-inst-cat {
+    font-size: 10px;
+    color: rgba(255, 200, 130, 0.6);
+    margin-top: 2px;
+}
+
+.pro-rec-dock {
+    padding: 10px 16px 16px;
+    display: flex;
+    justify-content: center;
+    background: rgba(15, 5, 5, 0.85);
+}
+
+.pro-hit-feedback {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    padding: 6px 20px;
+    font-size: 16px;
+    color: #fff5e6;
+    background: rgba(160, 60, 30, 0.6);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 180, 100, 0.3);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.pro-hit-feedback.show {
+    opacity: 1;
+}
+
+/* =========================================
+   节奏训练页面
+   ========================================= */
+
+.train-container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 32px;
+}
+
+.train-header {
+    margin-bottom: 24px;
+}
+
+.train-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.train-main-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #991b1b;
+}
+
+.train-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.train-btn {
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.train-btn-start {
+    background: #dc2626;
+    color: #fff;
+}
+
+.train-btn-start:hover:not(:disabled) {
+    background: #b91c1c;
+}
+
+.train-btn-stop {
+    background: #6b7280;
+    color: #fff;
+}
+
+.train-btn-stop:hover:not(:disabled) {
+    background: #4b5563;
+}
+
+.train-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.train-diff-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.train-label {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.train-diff-btn {
+    padding: 6px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.train-diff-btn:hover {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.train-diff-active {
+    background: #dc2626;
+    color: #fff;
+    border-color: #dc2626;
+}
+
+.train-score-section {
+    background: #fef7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.train-score-label {
+    font-size: 13px;
+    color: #9a3412;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.train-pattern {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.train-token {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #7c2d12;
+    background: #fff;
+    border: 2px solid #e5e7eb;
+    transition: all 0.2s;
+}
+
+.train-token-active {
+    background: #dc2626;
+    color: #fff;
+    border-color: #dc2626;
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.4);
+}
+
+.train-token-done {
+    background: #fca5a5;
+    color: #fff;
+    border-color: #fca5a5;
+}
+
+.train-hit-feedback {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    padding: 4px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.train-feedback-perfect {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.train-feedback-good {
+    background: #fef9c3;
+    color: #854d0e;
+    border: 1px solid #fde047;
+}
+
+.train-feedback-miss {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.train-timeline-wrap {
+    margin-bottom: 20px;
+}
+
+.train-timeline-label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.train-timeline {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 8px 0;
+}
+
+.train-beat-cell {
+    flex-shrink: 0;
+    width: 64px;
+    padding: 8px 4px;
+    border-radius: 10px;
+    text-align: center;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    transition: all 0.2s;
+}
+
+.train-beat-active {
+    background: #fef2f2;
+    border-color: #dc2626;
+    box-shadow: 0 0 8px rgba(220, 38, 38, 0.2);
+}
+
+.train-beat-done {
+    background: #f0fdf4;
+    border-color: #86efac;
+}
+
+.train-beat-token {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.train-beat-active .train-beat-token {
+    color: #dc2626;
+}
+
+.train-beat-imgs {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+
+.train-beat-imgs img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.train-hit-zone {
+    text-align: center;
+    padding: 24px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fef2f2 0%, #fef7ed 100%);
+    border: 2px solid #fecaca;
+    border-radius: 16px;
+}
+
+.train-hit-ring {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #dc2626;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+    margin-bottom: 8px;
+}
+
+.train-hit-hint {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.train-inst-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.train-inst-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.train-inst-btn:hover {
+    transform: scale(1.08);
+}
+
+.train-inst-btn:active {
+    transform: scale(0.92);
+}
+
+.train-inst-btn img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    transition: filter 0.15s;
+}
+
+.train-inst-img-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.train-key-tag {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(55, 65, 81, 0.45);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(209, 213, 219, 0.5);
+    border-radius: 4px;
+    padding: 1px 4px;
+    line-height: 1.4;
+    pointer-events: none;
+    font-family: 'Courier New', monospace;
+}
+
+.train-inst-hit img {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)) brightness(1.3);
+}
+
+.train-inst-hit .train-inst-img-wrap img {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)) brightness(1.3);
+}
+
+.train-inst-btn span {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.train-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.train-progress-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.train-progress-track {
+    flex: 1;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.train-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc2626, #f87171);
+    border-radius: 999px;
+    transition: width 0.3s;
+}
+
+.train-progress-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    min-width: 40px;
+}
+
+.train-score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.train-score-label-sm {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.train-score-val {
+    font-size: 28px;
+    font-weight: 700;
+    color: #dc2626;
+}
+
+.train-combo-wrap {
+    font-size: 14px;
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.train-result-panel {
+    margin-top: 24px;
+    padding: 28px;
+    background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+    border: 1px solid #fecaca;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.train-result-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #991b1b;
+    margin: 0 0 12px;
+}
+
+.train-result-grade {
+    font-size: 64px;
+    font-weight: 800;
+    color: #dc2626;
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+.train-result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.train-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.train-stat-label {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.train-stat-val {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.train-stat-perfect { color: #16a34a; }
+.train-stat-good { color: #f59e0b; }
+.train-stat-miss { color: #dc2626; }

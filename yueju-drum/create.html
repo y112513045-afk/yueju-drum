@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粤韵锣鼓坊</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* 添加自定义样式解决下拉菜单消失问题 */
+        .dropdown-container {
+            position: relative;
+        }
+        .dropdown-menu {
+            /* 移除可能导致间隙的margin-top */
+            margin-top: 0;
+            /* 添加过渡效果使显示更平滑 */
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+        }
+        /* 确保链接有足够的点击区域 */
+        .dropdown-container > a {
+            display: inline-block;
+            padding: 4px 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- 页面头部 -->
+    <header class="bg-red-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <!-- 左侧Logo区域 -->
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <i class="fa fa-music text-3xl" aria-hidden="true"></i>
+                <h1 class="text-2xl md:text-3xl font-bold">粤韵锣鼓坊</h1>
+            </div>
+            
+            <!-- 导航菜单 - 居中显示 -->
+            <nav class="w-full md:w-auto">
+                <ul class="flex justify-center space-x-6">
+                    <li><a href="play.html" class="hover:text-yellow-300 transition-colors">开始演奏</a></li>
+                    <li><a href="train.html" class="hover:text-yellow-300 transition-colors">节奏训练</a></li>
+                    <li><a href="create.html" class="hover:text-yellow-300 transition-colors">创意编曲</a></li>
+                    <li><a href="professional.html" class="hover:text-yellow-300 transition-colors">专业模式</a></li>
+                    <li><a href="index.html" class="hover:text-yellow-300 transition-colors">首页</a></li>
+                    
+                    <!-- 修复后的下拉菜单 -->
+                    <li class="dropdown-container group relative">
+                        <a href="#" class="hover:text-yellow-300 transition-colors">了解更多</a>
+                        <!-- 下拉菜单 -->
+                        <ul class="dropdown-menu absolute left-0 w-48 bg-red-800 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                            <li><a href="products.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">文创产品</a></li>
+                            <li><a href="courses.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">戏曲课程</a></li>
+                            <li><a href="activities.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">活动推送</a></li>
+                            <li><a href="cooperation.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">合作咨询</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</body>
+</html>
+
+    <!-- 创意编曲区 -->
+        <section id="create" class="mb-16 bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">创意编曲</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">素材库</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold mb-2 text-gray-700">曲牌旋律</h4>
+                            <div id="melodies-library" class="space-y-2 max-h-40 overflow-y-auto p-2 border border-gray-200 rounded-lg">
+                                <!-- 曲牌旋律将在这里动态添加 -->
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-gray-700">节奏型</h4>
+                            <div id="rhythms-library" class="space-y-2 max-h-40 overflow-y-auto p-2 border border-gray-200 rounded-lg">
+                                <!-- 节奏型将在这里动态添加 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-2">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">编曲工作台</h3>
+                    <div id="arrangement-timeline" class="bg-gray-50 p-4 rounded-lg mb-4 min-h-60 border border-gray-200">
+                        <!-- 编曲时间线将在这里显示 -->
+                        <div class="text-center text-gray-500 py-12">
+                            <i class="fa fa-arrow-left text-2xl mb-2"></i>
+                            <p>从左侧素材库拖放元素到这里开始编曲</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <button id="play-arrangement-btn" class="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-lg transition-colors">
+                            <i class="fa fa-play mr-2"></i>播放
+                        </button>
+                        <button id="clear-arrangement-btn" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-6 rounded-lg transition-colors">
+                            <i class="fa fa-trash mr-2"></i>清空
+                        </button>
+                        <button id="save-arrangement-btn" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg transition-colors">
+                            <i class="fa fa-save mr-2"></i>保存作品
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品分享区 -->
+        <section id="share" class="mb-16 bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">作品分享</h2>
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">我的作品</h3>
+                <div id="my-works" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 我的作品将在这里动态添加 -->
+                    <div class="text-center text-gray-500 py-12 col-span-full">
+                        <p>你还没有保存任何作品</p>
+                        <a href="#create" class="text-blue-600 hover:underline mt-2 inline-block">去创作一个吧</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">社区精选</h3>
+                <div id="community-works" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 社区作品将在这里动态添加 -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">粤韵锣鼓坊</h3>
+                    <p class="text-gray-300">传承粤剧文化，创新教学方式，让更多人感受传统锣鼓的魅力。</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">粤剧知识</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">使用帮助</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 粤韵锣鼓坊 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入JavaScript -->
+    <script src="scripts/audio-manager.js?v=20260412-2"></script>
+    <script src="scripts/play-section.js?v=20260412-2"></script>
+    <script src="scripts/training-section.js?v=20260412-2"></script>
+    <script src="scripts/arrangement-section.js"></script>
+    <script src="scripts/share-section.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

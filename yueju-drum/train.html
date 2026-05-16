@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粤韵锣鼓坊 - 节奏训练</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css?v=train-2">
+    <style>
+        .dropdown-container { position: relative; }
+        .dropdown-menu { margin-top: 0; transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; }
+        .dropdown-container > a { display: inline-block; padding: 4px 0; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <header class="bg-red-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <i class="fa fa-music text-3xl" aria-hidden="true"></i>
+                <h1 class="text-2xl md:text-3xl font-bold">粤韵锣鼓坊</h1>
+            </div>
+            <nav class="w-full md:w-auto">
+                <ul class="flex justify-center space-x-6">
+                    <li><a href="play.html" class="hover:text-yellow-300 transition-colors">开始演奏</a></li>
+                    <li><a href="train.html" class="hover:text-yellow-300 transition-colors" style="color:#ffd700;">节奏训练</a></li>
+                    <li><a href="create.html" class="hover:text-yellow-300 transition-colors">创意编曲</a></li>
+                    <li><a href="professional.html" class="hover:text-yellow-300 transition-colors">专业模式</a></li>
+                    <li><a href="index.html" class="hover:text-yellow-300 transition-colors">首页</a></li>
+                    <li class="dropdown-container group relative">
+                        <a href="#" class="hover:text-yellow-300 transition-colors">了解更多</a>
+                        <ul class="dropdown-menu absolute left-0 w-48 bg-red-800 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                            <li><a href="products.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">文创产品</a></li>
+                            <li><a href="courses.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">戏曲课程</a></li>
+                            <li><a href="activities.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">活动推送</a></li>
+                            <li><a href="cooperation.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">合作咨询</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="train-container">
+            <!-- 顶部：标题 + 难度选择 + 控制 -->
+            <div class="train-header">
+                <div class="train-title-row">
+                    <h2 class="train-main-title"><i class="fa fa-diamond mr-2"></i>锣鼓经节奏训练</h2>
+                    <div class="train-controls">
+                        <button class="train-btn train-btn-start" id="trainStartBtn"><i class="fa fa-play mr-1"></i>开始</button>
+                        <button class="train-btn train-btn-stop" id="trainStopBtn" disabled><i class="fa fa-stop mr-1"></i>停止</button>
+                    </div>
+                </div>
+                <div class="train-diff-row">
+                    <span class="train-label">难度：</span>
+                    <button class="train-diff-btn train-diff-active" data-diff="easy">简单</button>
+                    <button class="train-diff-btn" data-diff="medium">中等</button>
+                    <button class="train-diff-btn" data-diff="hard">困难</button>
+                </div>
+            </div>
+
+            <!-- 锣鼓经乐谱展示 -->
+            <div class="train-score-section">
+                <div class="train-score-label">当前乐谱</div>
+                <div class="train-pattern" id="patternDisplay"></div>
+                <div class="train-hit-feedback" id="trainHitFeedback"></div>
+            </div>
+
+            <!-- 时间线 -->
+            <div class="train-timeline-wrap">
+                <div class="train-timeline-label">节奏线</div>
+                <div class="train-timeline" id="timeline"></div>
+            </div>
+
+            <!-- 命中区域 -->
+            <div class="train-hit-zone" id="trainHitZone">
+                <div class="train-hit-ring">
+                    <span class="train-hit-token">仓</span>
+                </div>
+                <p class="train-hit-hint">点击下方乐器，跟着乐谱节奏演奏</p>
+            </div>
+
+            <!-- 乐器按钮 -->
+            <div class="train-inst-row">
+                <div class="train-inst-btn" data-inst="big-luo">
+                    <div class="train-inst-img-wrap">
+                        <img src="images/instruments/daluo.png" alt="大锣">
+                        <span class="train-key-tag">Q</span>
+                    </div>
+                    <span>大锣</span>
+                </div>
+                <div class="train-inst-btn" data-inst="nao-bo">
+                    <div class="train-inst-img-wrap">
+                        <img src="images/instruments/naobo.png" alt="铙钹">
+                        <span class="train-key-tag">W</span>
+                    </div>
+                    <span>铙钹</span>
+                </div>
+                <div class="train-inst-btn" data-inst="small-luo">
+                    <div class="train-inst-img-wrap">
+                        <img src="images/instruments/xiaoluo.png" alt="小锣">
+                        <span class="train-key-tag">E</span>
+                    </div>
+                    <span>小锣</span>
+                </div>
+            </div>
+
+            <!-- 进度 + 得分 -->
+            <div class="train-stats-row">
+                <div class="train-progress-wrap">
+                    <div class="train-progress-track">
+                        <div class="train-progress-fill" id="trainProgressFill" style="width:0%"></div>
+                    </div>
+                    <span class="train-progress-text" id="trainProgressText">0%</span>
+                </div>
+                <div class="train-score-display">
+                    <span class="train-score-label-sm">得分</span>
+                    <span class="train-score-val" id="trainScoreVal">0</span>
+                    <span class="train-combo-wrap" id="trainComboWrap" style="display:none">
+                        连击 <span id="trainComboVal">0</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 结果面板 -->
+            <div class="train-result-panel" id="trainResultPanel" style="display:none">
+                <h3 class="train-result-title">训练完成</h3>
+                <div class="train-result-grade" id="trainResultGrade">S</div>
+                <div class="train-result-stats">
+                    <div class="train-stat-item"><span class="train-stat-label">总分</span><span class="train-stat-val" id="trainResultScore">0</span></div>
+                    <div class="train-stat-item"><span class="train-stat-label">完美</span><span class="train-stat-val train-stat-perfect" id="trainResultPerfect">0</span></div>
+                    <div class="train-stat-item"><span class="train-stat-label">良好</span><span class="train-stat-val train-stat-good" id="trainResultGood">0</span></div>
+                    <div class="train-stat-item"><span class="train-stat-label">未命中</span><span class="train-stat-val train-stat-miss" id="trainResultMiss">0</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">粤韵锣鼓坊</h3>
+                    <p class="text-gray-300">传承粤剧文化，创新教学方式，让更多人感受传统锣鼓的魅力。</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">粤剧知识</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">使用帮助</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-weibo text-xl"></i></a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-youtube-play text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 粤韵锣鼓坊 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/training-section.js?v=train-2"></script>
+    <script>
+        var audioPoolMap = {};
+        var audioCursorMap = {};
+        var trainKeyMap = { 'q': 'big-luo', 'w': 'nao-bo', 'e': 'small-luo' };
+        ['big-luo','nao-bo','small-luo'].forEach(function(id) {
+            var info = { 'big-luo': 'audio/daluo-f.m4a', 'nao-bo': 'audio/naobo-f.m4a', 'small-luo': 'audio/xiaoluo-f.m4a' };
+            var pool = [];
+            for (var i = 0; i < 5; i++) { var a = new Audio(info[id]); a.preload = 'auto'; pool.push(a); }
+            audioPoolMap[id] = pool;
+            audioCursorMap[id] = 0;
+        });
+
+        function playTrainAudio(id) {
+            var pool = audioPoolMap[id];
+            if (!pool) return;
+            var c = audioCursorMap[id] || 0;
+            var a = pool[c % pool.length];
+            audioCursorMap[id] = (c + 1) % pool.length;
+            a.pause();
+            a.currentTime = (id === 'small-luo') ? 0.4 : 0;
+            a.play().catch(function(){});
+        }
+
+        function trainHit(instId) {
+            var btn = document.querySelector('.train-inst-btn[data-inst="' + instId + '"]');
+            if (btn) {
+                btn.classList.remove('train-inst-hit');
+                void btn.offsetWidth;
+                btn.classList.add('train-inst-hit');
+                setTimeout(function(){ btn.classList.remove('train-inst-hit'); }, 180);
+            }
+            playTrainAudio(instId);
+            if (window.TrainModule) window.TrainModule.hit(instId);
+        }
+
+        document.querySelectorAll('.train-inst-btn').forEach(function(btn) {
+            var instId = btn.getAttribute('data-inst');
+            function onHit(e) {
+                e.preventDefault();
+                trainHit(instId);
+            }
+            btn.addEventListener('touchstart', onHit, {passive:false});
+            btn.addEventListener('mousedown', onHit);
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.repeat || e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            var key = e.key.toLowerCase();
+            var instId = trainKeyMap[key];
+            if (!instId) return;
+            e.preventDefault();
+            trainHit(instId);
+        });
+    </script>
+</body>
+</html>

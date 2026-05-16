@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>粤韵锣鼓坊 - 专业模式</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css?v=pro-2">
+    <style>
+        .dropdown-container { position: relative; }
+        .dropdown-menu { margin-top: 0; transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; }
+        .dropdown-container > a { display: inline-block; padding: 4px 0; }
+        body.pro-body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body.pro-body > .pro-page { flex: 1 1 auto; min-height: 0; }
+        body.pro-body > footer { display: none; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans pro-body">
+    <header class="bg-red-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <i class="fa fa-music text-3xl" aria-hidden="true"></i>
+                <h1 class="text-2xl md:text-3xl font-bold">粤韵锣鼓坊</h1>
+            </div>
+            <nav class="w-full md:w-auto">
+                <ul class="flex justify-center space-x-6">
+                    <li><a href="play.html" class="hover:text-yellow-300 transition-colors">开始演奏</a></li>
+                    <li><a href="train.html" class="hover:text-yellow-300 transition-colors">节奏训练</a></li>
+                    <li><a href="create.html" class="hover:text-yellow-300 transition-colors">创意编曲</a></li>
+                    <li><a href="professional.html" class="hover:text-yellow-300 transition-colors" style="color: #ffd700;">专业模式</a></li>
+                    <li><a href="index.html" class="hover:text-yellow-300 transition-colors">首页</a></li>
+                    <li class="dropdown-container group relative">
+                        <a href="#" class="hover:text-yellow-300 transition-colors">了解更多</a>
+                        <ul class="dropdown-menu absolute left-0 w-48 bg-red-800 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                            <li><a href="products.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">文创产品</a></li>
+                            <li><a href="courses.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">戏曲课程</a></li>
+                            <li><a href="activities.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">活动推送</a></li>
+                            <li><a href="cooperation.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">合作咨询</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="pro-page">
+        <div class="pro-stage">
+            <img class="pro-stage-bg" src="images/background/xitai.png" alt="" />
+            <div class="pro-stage-overlay"></div>
+            <div class="pro-hit-feedback" id="hitFeedback"></div>
+
+            <div class="pro-instruments" id="proInstruments"></div>
+
+            <div class="pro-rec-dock" style="position:absolute;bottom:0;left:0;right:0;z-index:10;">
+                <div class="rec-bar">
+                    <button class="rec-btn rec-btn-rec" id="btnRecord" title="开始录制"><i class="fa fa-circle"></i></button>
+                    <button class="rec-btn" id="btnStop" title="停止录制" disabled><i class="fa fa-stop"></i></button>
+                    <button class="rec-btn" id="btnPause" title="暂停" disabled><i class="fa fa-pause"></i></button>
+                    <div class="rec-divider"></div>
+                    <span class="rec-time" id="recTime">00:00</span>
+                    <span class="rec-status" id="recStatus">待机</span>
+                    <div class="rec-divider"></div>
+                    <button class="rec-btn" id="btnPlay" title="回放" disabled><i class="fa fa-play"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">粤韵锣鼓坊</h3>
+                    <p class="text-gray-300">传承粤剧文化，创新教学方式，让更多人感受传统锣鼓的魅力。</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">粤剧知识</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">使用帮助</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-weibo text-xl"></i></a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-youtube-play text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 粤韵锣鼓坊 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/recorder.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        var allInstruments = [
+            { id: 'big-luo', name: '大锣', cat: '京剧', image: 'images/instruments/daluo.png', fastAudio: 'audio/daluo-f.m4a', normalAudio: 'audio/daluo-l.m4a' },
+            { id: 'nao-bo', name: '铙钹', cat: '京剧', image: 'images/instruments/naobo.png', fastAudio: 'audio/naobo-f.m4a', normalAudio: 'audio/naobo-l.m4a' },
+            { id: 'small-luo', name: '小锣', cat: '京剧', image: 'images/instruments/xiaoluo.png', fastAudio: 'audio/xiaoluo-f.m4a', normalAudio: 'audio/xiaoluo-l.m4a' },
+            { id: 'danpi-gu', name: '单皮鼓', cat: '京剧', image: 'images/instruments/danpigu.png', fastAudio: 'audio/danbigu.m4a', normalAudio: 'audio/danbigu.m4a' },
+            { id: 'gaobian-luo', name: '高边锣', cat: '粤剧', image: 'images/instruments/gaobianluo.png', fastAudio: 'audio/gaobianluo-f.m4a', normalAudio: 'audio/gaobianluo-l.m4a' },
+            { id: 'wen-luo', name: '文锣', cat: '粤剧', image: 'images/instruments/wenluo.png', fastAudio: 'audio/wenluo-f.m4a', normalAudio: 'audio/wenluo-l.m4a' },
+            { id: 'shi-cha', name: '狮镲', cat: '粤剧', image: 'images/instruments/shicha.png', fastAudio: 'audio/shicha-f.m4a', normalAudio: 'audio/shicha-l.m4a' },
+            { id: 'shuangpi-gu', name: '双皮鼓', cat: '粤剧', image: 'images/instruments/shuangpigu.png', fastAudio: 'audio/zhangban-shuangpigu.m4a', normalAudio: 'audio/zhangban-shuangpigu.m4a' },
+            { id: 'mu-yu', name: '木鱼', cat: '粤剧', image: 'images/instruments/muyu.png', fastAudio: 'audio/zhangban-muyu.m4a', normalAudio: 'audio/zhangban-muyu.m4a' },
+            { id: 'sha-gu', name: '沙鼓', cat: '粤剧', image: 'images/instruments/shagu.png', fastAudio: 'audio/zhangban-shagu.m4a', normalAudio: 'audio/zhangban-shagu.m4a' }
+        ];
+
+        var KEY_MAP = {
+            'q': 'big-luo', 'w': 'nao-bo', 'e': 'small-luo', 'r': 'danpi-gu',
+            'a': 'gaobian-luo', 's': 'wen-luo', 'd': 'shi-cha', 'f': 'shuangpi-gu',
+            'z': 'mu-yu', 'x': 'sha-gu'
+        };
+        var KEY_LABELS = {};
+        Object.keys(KEY_MAP).forEach(function (k) { KEY_LABELS[KEY_MAP[k]] = k.toUpperCase(); });
+
+        var audioPools = {};
+        var audioCursors = {};
+        var feedbackTimer = null;
+
+        function createPool(src, size) {
+            var pool = [];
+            for (var i = 0; i < size; i++) {
+                var a = new Audio(src);
+                a.preload = 'auto';
+                pool.push(a);
+            }
+            return pool;
+        }
+
+        function initAudio() {
+            allInstruments.forEach(function (inst) {
+                audioPools[inst.id + '_fast'] = createPool(inst.fastAudio, 5);
+                audioCursors[inst.id + '_fast'] = 0;
+                if (inst.normalAudio !== inst.fastAudio) {
+                    audioPools[inst.id + '_normal'] = createPool(inst.normalAudio, 3);
+                    audioCursors[inst.id + '_normal'] = 0;
+                }
+            });
+        }
+
+        function playFromPool(poolKey, seek) {
+            var pool = audioPools[poolKey];
+            if (!pool) return;
+            var c = audioCursors[poolKey] || 0;
+            var a = pool[c % pool.length];
+            audioCursors[poolKey] = (c + 1) % pool.length;
+            a.pause();
+            a.currentTime = seek || 0;
+            a.play().catch(function () {});
+        }
+
+        window.playInstrumentAudio = function (id, type) {
+            var key = id + '_' + (type === 'normal' ? 'normal' : '_fast');
+            if (!audioPools[key]) key = id + '_fast';
+            var seek = (id === 'small-luo' && type === 'fast') ? 0.4 : 0;
+            playFromPool(key, seek);
+        };
+
+        function showFeedback(name) {
+            var el = document.getElementById('hitFeedback');
+            if (!el) return;
+            el.textContent = name;
+            el.classList.add('show');
+            if (feedbackTimer) clearTimeout(feedbackTimer);
+            feedbackTimer = setTimeout(function () { el.classList.remove('show'); }, 800);
+        }
+
+        function render() {
+            var container = document.getElementById('proInstruments');
+            container.innerHTML = '';
+            allInstruments.forEach(function (inst) {
+                var card = document.createElement('div');
+                card.className = 'pro-inst-card';
+                card.setAttribute('data-id', inst.id);
+
+                var img = document.createElement('img');
+                img.className = 'pro-inst-img';
+                img.src = inst.image;
+                img.alt = inst.name;
+
+                var name = document.createElement('div');
+                name.className = 'pro-inst-name';
+                name.textContent = inst.name;
+
+                var cat = document.createElement('div');
+                cat.className = 'pro-inst-cat';
+                cat.textContent = inst.cat;
+
+                card.appendChild(img);
+                card.appendChild(name);
+                card.appendChild(cat);
+
+                if (KEY_LABELS[inst.id]) {
+                    var keyTag = document.createElement('span');
+                    keyTag.className = 'pro-key-hint';
+                    keyTag.textContent = KEY_LABELS[inst.id];
+                    card.appendChild(keyTag);
+                }
+
+                container.appendChild(card);
+
+                bindHit(card, inst);
+            });
+        }
+
+        function bindHit(card, inst) {
+            var longPressed = false;
+            var timer = null;
+
+            function onStart(e) {
+                e.preventDefault();
+                longPressed = false;
+                if (timer) { clearTimeout(timer); timer = null; }
+                timer = setTimeout(function () {
+                    longPressed = true;
+                    var seek = 0;
+                    var poolKey = inst.id + '_normal';
+                    if (!audioPools[poolKey]) poolKey = inst.id + '_fast';
+                    playFromPool(poolKey, seek);
+                    triggerAnim(card);
+                    showFeedback(inst.name);
+                    if (window.Recorder) window.Recorder.recordEvent(inst.id, 'normal');
+                }, 320);
+            }
+
+            function onEnd(e) {
+                e.preventDefault();
+                if (timer) { clearTimeout(timer); timer = null; }
+                if (!longPressed) {
+                    var seek = (inst.id === 'small-luo') ? 0.4 : 0;
+                    playFromPool(inst.id + '_fast', seek);
+                    triggerAnim(card);
+                    showFeedback(inst.name);
+                    if (window.Recorder) window.Recorder.recordEvent(inst.id, 'fast');
+                }
+            }
+
+            function onCancel() {
+                if (timer) { clearTimeout(timer); timer = null; }
+                longPressed = false;
+            }
+
+            card.addEventListener('touchstart', onStart, { passive: false });
+            card.addEventListener('touchend', onEnd, { passive: false });
+            card.addEventListener('touchcancel', onCancel);
+            card.addEventListener('mousedown', onStart);
+            card.addEventListener('mouseup', onEnd);
+            card.addEventListener('mouseleave', onCancel);
+        }
+
+        function triggerAnim(el) {
+            el.classList.remove('hit-anim');
+            void el.offsetWidth;
+            el.classList.add('hit-anim');
+            setTimeout(function () { el.classList.remove('hit-anim'); }, 150);
+        }
+
+        function init() {
+            initAudio();
+            render();
+            Recorder.init({
+                btnRecord: 'btnRecord', btnStop: 'btnStop',
+                btnPause: 'btnPause', btnPlay: 'btnPlay',
+                timeDisplay: 'recTime', statusDisplay: 'recStatus'
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.repeat || e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                var key = e.key.toLowerCase();
+                var instId = KEY_MAP[key];
+                if (!instId) return;
+                var card = document.querySelector('[data-id="' + instId + '"]');
+                if (!card) return;
+                e.preventDefault();
+                var seek = (instId === 'small-luo') ? 0.4 : 0;
+                playFromPool(instId + '_fast', seek);
+                triggerAnim(card);
+                var inst = allInstruments.find(function (i) { return i.id === instId; });
+                if (inst) showFeedback(inst.name);
+                if (window.Recorder) window.Recorder.recordEvent(instId, 'fast');
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+</body>
+</html>

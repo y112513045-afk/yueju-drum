@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>粤韵锣鼓坊 - 开始演奏</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css?v=play-2">
+    <style>
+        .dropdown-container { position: relative; }
+        .dropdown-menu { margin-top: 0; transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; }
+        .dropdown-container > a { display: inline-block; padding: 4px 0; }
+        body.play-body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body.play-body > .play-page {
+            flex: 1 1 auto;
+            height: auto;
+            min-height: 0;
+        }
+        body.play-body > footer {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans play-body">
+    <header class="bg-red-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <i class="fa fa-music text-3xl" aria-hidden="true"></i>
+                <h1 class="text-2xl md:text-3xl font-bold">粤韵锣鼓坊</h1>
+            </div>
+            <nav class="w-full md:w-auto">
+                <ul class="flex justify-center space-x-6">
+                    <li><a href="play.html" class="hover:text-yellow-300 transition-colors">开始演奏</a></li>
+                    <li><a href="train.html" class="hover:text-yellow-300 transition-colors">节奏训练</a></li>
+                    <li><a href="create.html" class="hover:text-yellow-300 transition-colors">创意编曲</a></li>
+                    <li><a href="professional.html" class="hover:text-yellow-300 transition-colors">专业模式</a></li>
+                    <li><a href="index.html" class="hover:text-yellow-300 transition-colors">首页</a></li>
+                    <li class="dropdown-container group relative">
+                        <a href="#" class="hover:text-yellow-300 transition-colors">了解更多</a>
+                        <ul class="dropdown-menu absolute left-0 w-48 bg-red-800 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                            <li><a href="products.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">文创产品</a></li>
+                            <li><a href="courses.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">戏曲课程</a></li>
+                            <li><a href="activities.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">活动推送</a></li>
+                            <li><a href="cooperation.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">合作咨询</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="play-page">
+        <div class="stage-wrap">
+            <img class="stage-bg" id="stageBg" src="images/background/jingju.png" alt="" />
+            <div class="stage-light"></div>
+            <div class="stage-floor"></div>
+
+            <div class="landscape-tip">请横屏以获得最佳演奏体验</div>
+
+            <div class="top-mode-switch">
+                <div class="top-mode-btn top-mode-btn-active" data-mode="practice">自由演奏</div>
+                <div class="top-mode-btn" data-mode="challenge">闯关模式</div>
+            </div>
+
+            <div class="content-wrapper" id="contentWrapper">
+                <div class="scene-switch">
+                    <div class="scene-btn-panel">
+                        <div class="scene-btn-group">
+                            <div class="scene-btn scene-btn-active" data-opera="jingju">京剧锣鼓</div>
+                            <div class="scene-btn" data-opera="yueju">粤剧锣鼓</div>
+                        </div>
+                    </div>
+                    <div class="hit-name" id="hitName">点击乐器图片查看名称</div>
+                    <div class="scene-intro">锣鼓领奏，掌控全场口与节奏层次</div>
+                </div>
+
+                <div class="mode-section" id="modeSection">
+                    <div class="row row-1" id="row1"></div>
+                    <div class="row row-2" id="row2"></div>
+                </div>
+            </div>
+
+            <div class="challenge-layout" id="challengeLayout" style="display:none;">
+                <div class="challenge-main">
+                    <div class="challenge-left">
+                        <div class="challenge-level" id="challengeLevel">闯关模式 · 第1/5关</div>
+                        <div class="challenge-card">
+                            <div class="challenge-token-label">当前提示锣鼓经</div>
+                            <div class="challenge-token" id="challengeToken">仓</div>
+                            <div class="challenge-expected" id="challengeExpected">需同时点击：小锣 + 大锣 + 铙钹</div>
+                        </div>
+                        <div class="challenge-feedback challenge-feedback-info" id="challengeFeedback">请根据左侧提示，在短时间窗口内完成合击</div>
+                        <div class="challenge-coming" id="challengeComing">第2-5关正在制作中</div>
+                    </div>
+                    <div class="challenge-right">
+                        <div class="challenge-row challenge-row-single" id="challengeRow"></div>
+                    </div>
+                </div>
+                <div class="challenge-progress-wrap challenge-progress-bottom">
+                    <div class="challenge-progress-track">
+                        <div class="challenge-progress-fill" id="challengeProgressFill" style="width: 0%;"></div>
+                    </div>
+                    <div class="challenge-progress-text" id="challengeProgressText">进度 0 / 6</div>
+                </div>
+            </div>
+
+            <div class="rec-dock" style="position:absolute;bottom:0;left:0;right:0;z-index:10;">
+                <div class="rec-bar">
+                    <button class="rec-btn rec-btn-rec" id="btnRecord" title="开始录制"><i class="fa fa-circle"></i></button>
+                    <button class="rec-btn" id="btnStop" title="停止录制" disabled><i class="fa fa-stop"></i></button>
+                    <button class="rec-btn" id="btnPause" title="暂停" disabled><i class="fa fa-pause"></i></button>
+                    <div class="rec-divider"></div>
+                    <span class="rec-time" id="recTime">00:00</span>
+                    <span class="rec-status" id="recStatus">待机</span>
+                    <div class="rec-divider"></div>
+                    <button class="rec-btn" id="btnPlay" title="回放" disabled><i class="fa fa-play"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">粤韵锣鼓坊</h3>
+                    <p class="text-gray-300">传承粤剧文化，创新教学方式，让更多人感受传统锣鼓的魅力。</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">粤剧知识</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">使用帮助</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-weibo text-xl"></i></a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fa fa-youtube-play text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 粤韵锣鼓坊 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/play-section.js?v=play-2"></script>
+    <script src="scripts/recorder.js"></script>
+    <script>
+        window.playInstrumentAudio = function (id, type) {
+            if (type === 'normal') {
+                playNormalAudio(id);
+            } else {
+                playFastAudio(id);
+            }
+        };
+        Recorder.init({
+            btnRecord: 'btnRecord', btnStop: 'btnStop',
+            btnPause: 'btnPause', btnPlay: 'btnPlay',
+            timeDisplay: 'recTime', statusDisplay: 'recStatus'
+        });
+    </script>
+</body>
+</html>

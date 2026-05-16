@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粤韵锣鼓坊</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* 添加自定义样式解决下拉菜单消失问题 */
+        .dropdown-container {
+            position: relative;
+        }
+        .dropdown-menu {
+            /* 移除可能导致间隙的margin-top */
+            margin-top: 0;
+            /* 添加过渡效果使显示更平滑 */
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+        }
+        /* 确保链接有足够的点击区域 */
+        .dropdown-container > a {
+            display: inline-block;
+            padding: 4px 0;
+        }
+
+        /* 乐器展示 - 单卡顺序滑动器 */
+        .instrument-slider-section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .instrument-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+        }
+        .instrument-slider-viewport {
+            overflow: hidden;
+            width: 100%;
+        }
+        .instrument-slider-track {
+            display: flex;
+            transition: transform 0.45s ease;
+        }
+        .instrument-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 32px 40px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .instrument-slide-img {
+            flex-shrink: 0;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fef7ed;
+            border-radius: 16px;
+        }
+        .instrument-slide-img img {
+            max-width: 130px;
+            max-height: 130px;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+        }
+        .instrument-slide-text h4 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #991b1b;
+            margin: 0 0 8px;
+        }
+        .instrument-slide-text p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0;
+        }
+        .slider-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 0 20px;
+        }
+        .slider-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: #374151;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .slider-btn:hover {
+            background: #fef2f2;
+            border-color: #dc2626;
+            color: #dc2626;
+        }
+        .slider-dots {
+            display: flex;
+            gap: 8px;
+        }
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d1d5db;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+        }
+        .slider-dot.active {
+            background: #dc2626;
+            width: 28px;
+            border-radius: 5px;
+        }
+        .slider-counter {
+            font-size: 13px;
+            color: #9ca3af;
+            margin: 0 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- 页面头部 -->
+    <header class="bg-red-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <!-- 左侧Logo区域 -->
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <i class="fa fa-music text-3xl" aria-hidden="true"></i>
+                <h1 class="text-2xl md:text-3xl font-bold">粤韵锣鼓坊</h1>
+            </div>
+            
+            <!-- 导航菜单 - 居中显示 -->
+            <nav class="w-full md:w-auto">
+                <ul class="flex justify-center space-x-6">
+                    <li><a href="play.html" class="hover:text-yellow-300 transition-colors">开始演奏</a></li>
+                    <li><a href="train.html" class="hover:text-yellow-300 transition-colors">节奏训练</a></li>
+                    <li><a href="create.html" class="hover:text-yellow-300 transition-colors">创意编曲</a></li>
+                    <li><a href="professional.html" class="hover:text-yellow-300 transition-colors">专业模式</a></li>
+                    <li><a href="index.html" class="hover:text-yellow-300 transition-colors">首页</a></li>
+                    
+                    <!-- 修复后的下拉菜单 -->
+                    <li class="dropdown-container group relative">
+                        <a href="#" class="hover:text-yellow-300 transition-colors">了解更多</a>
+                        <!-- 下拉菜单 -->
+                        <ul class="dropdown-menu absolute left-0 w-48 bg-red-800 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                            <li><a href="products.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">文创产品</a></li>
+                            <li><a href="courses.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">戏曲课程</a></li>
+                            <li><a href="activities.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">活动推送</a></li>
+                            <li><a href="cooperation.html" class="block px-4 py-2 hover:bg-red-700 transition-colors">合作咨询</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 英雄区域 -->
+        <section class="bg-gradient-to-r from-red-900 to-red-700 text-white rounded-xl shadow-xl p-8 mb-12">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">体验粤剧锣鼓的魅力</h2>
+                    <p class="text-lg mb-6">零门槛学习传统粤剧锣鼓，通过游戏化方式掌握复杂节奏，感受传统文化的魅力</p>
+                    <a href="play.html" class="bg-yellow-500 hover:bg-yellow-600 text-red-900 font-bold py-3 px-6 rounded-full inline-block transition-all transform hover:scale-105">
+                        立即体验 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="images/hero-image.jpg" alt="粤剧锣鼓表演" class="rounded-lg shadow-lg max-w-full h-auto">
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能介绍区 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">核心功能</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 功能卡片1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
+                    <div class="h-48 bg-red-100 flex items-center justify-center">
+                        <i class="fa fa-mouse-pointer text-6xl text-red-700"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">可视化"零门槛"演奏</h3>
+                        <p class="text-gray-600">将京剧粤剧锣鼓中复杂乐器转化为直观的虚拟图标，点击即可触发专业级音效。</p>
+                    </div>
+                </div>
+                
+                <!-- 功能卡片2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
+                    <div class="h-48 bg-red-100 flex items-center justify-center">
+                        <i class="fa fa-gamepad text-6xl text-red-700"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">游戏化节奏训练</h3>
+                        <p class="text-gray-600">将传统"锣鼓经"转化为动态滚动的节奏条，在正确时机点击，如同体验"节奏大师"。</p>
+                    </div>
+                </div>
+                
+                <!-- 功能卡片3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
+                    <div class="h-48 bg-red-100 flex items-center justify-center">
+                        <i class="fa fa-film text-6xl text-red-700"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">沉浸式视听体验</h3>
+                        <p class="text-gray-600">配有原创戏曲人物身段动画及经典唱段音频作为背景，营造沉浸式氛围。</p>
+                    </div>
+                </div>
+                
+                <!-- 功能卡片4 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
+                    <div class="h-48 bg-red-100 flex items-center justify-center">
+                        <i class="fa fa-share-alt text-6xl text-red-700"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">创意编曲与分享</h3>
+                        <p class="text-gray-600">自由编曲创作属于自己的粤剧鼓乐片段，并可一键生成作品进行社交分享。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 乐器展示区 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">传统乐器</h2>
+            <p class="text-center text-gray-500 mb-10">京剧与粤剧锣鼓中的核心乐器，点击即可在演奏页面体验</p>
+
+            <!-- 京剧乐器 -->
+            <h3 class="text-xl font-bold text-center mb-4 text-red-800">
+                <i class="fa fa-star-o mr-2"></i>京剧乐器
+            </h3>
+            <div class="instrument-slider-section mb-12">
+                <div class="instrument-slider" data-slider="jingju">
+                    <div class="instrument-slider-viewport">
+                        <div class="instrument-slider-track">
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/daluo.png" alt="大锣"></div>
+                                <div class="instrument-slide-text"><h4>大锣</h4><p>京剧武场核心乐器，音色低沉浑厚，常用于渲染紧张激烈的气氛，配合武打动作节奏。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/naobo.png" alt="铙钹"></div>
+                                <div class="instrument-slide-text"><h4>铙钹</h4><p>京剧武场乐器，音色尖锐明亮，与大小锣配合使用，制造丰富的音响层次和戏剧效果。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/xiaoluo.png" alt="小锣"></div>
+                                <div class="instrument-slide-text"><h4>小锣</h4><p>京剧武场乐器，音色清脆明亮，常用于配合人物出场、动作节奏及轻松诙谐的场景。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/danpigu.png" alt="单皮鼓"></div>
+                                <div class="instrument-slide-text"><h4>单皮鼓</h4><p>京剧文场指挥乐器，司鼓者统领全场节奏，是戏曲乐队的灵魂，掌控唱念做打的起承转合。</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-btn slider-prev"><i class="fa fa-chevron-left"></i></button>
+                        <div class="slider-dots" data-dots="jingju"></div>
+                        <span class="slider-counter" data-counter="jingju">1 / 4</span>
+                        <button class="slider-btn slider-next"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 粤剧乐器 -->
+            <h3 class="text-xl font-bold text-center mb-4 text-red-800">
+                <i class="fa fa-star-o mr-2"></i>粤剧乐器
+            </h3>
+            <div class="instrument-slider-section mb-10">
+                <div class="instrument-slider" data-slider="yueju">
+                    <div class="instrument-slider-viewport">
+                        <div class="instrument-slider-track">
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/gaobianluo.png" alt="高边锣"></div>
+                                <div class="instrument-slide-text"><h4>高边锣</h4><p>粤剧武场乐器，音色高亢激昂，常用于武打场面和激烈气氛的渲染。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/wenluo.png" alt="文锣"></div>
+                                <div class="instrument-slide-text"><h4>文锣</h4><p>粤剧文场乐器，音色柔和圆润，用于伴奏文戏和抒情唱段，营造典雅氛围。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/shicha.png" alt="狮镲"></div>
+                                <div class="instrument-slide-text"><h4>狮镲</h4><p>粤剧武场乐器，音色铿锵有力，常用于舞狮表演和喜庆热闹的场面。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/shuangpigu.png" alt="双皮鼓"></div>
+                                <div class="instrument-slide-text"><h4>双皮鼓</h4><p>粤剧掌版核心乐器，节奏灵活多变，是粤剧乐队的指挥灵魂，统领全场板式。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/muyu.png" alt="木鱼"></div>
+                                <div class="instrument-slide-text"><h4>木鱼</h4><p>粤剧掌版乐器，音色清脆空灵，用于稳定节拍和点缀节奏变化。</p></div>
+                            </div>
+                            <div class="instrument-slide">
+                                <div class="instrument-slide-img"><img src="images/instruments/shagu.png" alt="沙鼓"></div>
+                                <div class="instrument-slide-text"><h4>沙鼓</h4><p>粤剧掌版乐器，音色沙哑独特，与双皮鼓配合营造丰富的节奏层次变化。</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-btn slider-prev"><i class="fa fa-chevron-left"></i></button>
+                        <div class="slider-dots" data-dots="yueju"></div>
+                        <span class="slider-counter" data-counter="yueju">1 / 6</span>
+                        <button class="slider-btn slider-next"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="play.html" class="inline-block bg-red-800 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg">
+                    <i class="fa fa-hand-pointer-o mr-2"></i>去体验演奏
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">粤韵锣鼓坊</h3>
+                    <p class="text-gray-300">传承粤剧文化，创新教学方式，让更多人感受传统锣鼓的魅力。</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">粤剧知识</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">使用帮助</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 粤韵锣鼓坊 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入JavaScript -->
+    <script src="scripts/audio-manager.js?v=20260412-2"></script>
+    <script src="scripts/play-section.js?v=20260412-2"></script>
+    <script src="scripts/training-section.js?v=20260412-2"></script>
+    <script src="scripts/arrangement-section.js"></script>
+    <script src="scripts/share-section.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        document.querySelectorAll('.instrument-slider').forEach(function(slider) {
+            var track = slider.querySelector('.instrument-slider-track');
+            var slides = slider.querySelectorAll('.instrument-slide');
+            var dotsWrap = slider.querySelector('.slider-dots');
+            var counter = slider.querySelector('[data-counter]');
+            var prevBtn = slider.querySelector('.slider-prev');
+            var nextBtn = slider.querySelector('.slider-next');
+            var current = 0;
+            var total = slides.length;
+
+            for (var i = 0; i < total; i++) {
+                var dot = document.createElement('button');
+                dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('data-index', i);
+                dotsWrap.appendChild(dot);
+            }
+
+            function goTo(index) {
+                if (index < 0) index = total - 1;
+                if (index >= total) index = 0;
+                current = index;
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dotsWrap.querySelectorAll('.slider-dot').forEach(function(d, i) {
+                    d.classList.toggle('active', i === current);
+                });
+                if (counter) counter.textContent = (current + 1) + ' / ' + total;
+            }
+
+            prevBtn.addEventListener('click', function() { goTo(current - 1); });
+            nextBtn.addEventListener('click', function() { goTo(current + 1); });
+            dotsWrap.addEventListener('click', function(e) {
+                var dot = e.target.closest('.slider-dot');
+                if (dot) goTo(parseInt(dot.getAttribute('data-index')));
+            });
+
+            var autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
+            slider.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
+            slider.addEventListener('mouseleave', function() {
+                autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
+            });
+        });
+    </script>
+</body>
+</html>
